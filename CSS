@@ -1,1 +1,182 @@
+```css:style.css
+/* 基本設定 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2c3e50; /* 背景をダークグレーに */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #ecf0f1;
+}
 
+/* デジタルフォントの適用 */
+.digital-text {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* 計測器本体のケース */
+.device-container {
+    background-color: #1a252f;
+    border: 2px solid #34495e;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.8);
+    width: 800px;
+    max-width: 95%;
+}
+
+.device-header {
+    border-bottom: 2px solid #34495e;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.device-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #95a5a6;
+    letter-spacing: 4px;
+}
+
+.device-body {
+    display: flex;
+    gap: 30px;
+}
+
+/* --- 入力パネル（左側） --- */
+.input-panel, .output-panel {
+    flex: 1;
+    background-color: #233140;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.input-panel h2 {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-top: 0;
+}
+
+.control-group {
+    margin-bottom: 30px;
+}
+
+.control-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* === ここから：計測器風スライダーのデザイン === */
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+input[type=range]:focus {
+    outline: none;
+}
+/* スライダーの「溝」 */
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 12px;
+    cursor: pointer;
+    background: #0b1116; /* 深い溝を表現 */
+    border-radius: 6px;
+    border: 1px solid #34495e;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+}
+/* スライダーの「つまみ」 */
+input[type=range]::-webkit-slider-thumb {
+    height: 30px;
+    width: 20px;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #7f8c8d, #34495e); /* 金属っぽいグラデーション */
+    border: 1px solid #2c3e50;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -10px; /* 溝の中央に配置 */
+    box-shadow: 0 3px 5px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.2);
+}
+/* ======================================= */
+
+/* --- 出力パネル（右側） --- */
+.display-screen {
+    background-color: #0b1116;
+    border: 3px solid #2c3e50;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+.display-label {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.large-display {
+    font-size: 72px;
+    color: #ecf0f1;
+    margin: 20px 0 10px;
+    text-shadow: 0 0 10px rgba(236, 240, 241, 0.3);
+}
+
+/* === ここから：LEDランプのデザイン === */
+.alert-system {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a252f;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #34495e;
+}
+
+.status-message {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.led-array {
+    display: flex;
+    gap: 15px;
+    background-color: #0b1116;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid #34495e;
+}
+
+.led {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #2c3e50; /* 消灯状態のグレー */
+    border: 2px solid #1a252f;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+    transition: all 0.2s;
+}
+
+/* JavaScriptから 'on' クラスが付けられた時だけ光る（グローエフェクト） */
+.led.green.on { background-color: #2ecc71; box-shadow: 0 0 15px #2ecc71, inset 0 0 5px white; border-color: #27ae60; }
+.led.yellow.on { background-color: #f1c40f; box-shadow: 0 0 15px #f1c40f, inset 0 0 5px white; border-color: #f39c12; }
+.led.red.on { background-color: #e74c3c; box-shadow: 0 0 15px #e74c3c, inset 0 0 5px white; border-color: #c0392b; }
+/* ==================================== */
+```eof
+
+**【CSSの解説】**
+*   `input[type=range]::-webkit-slider-thumb`: ここで、標準の丸いスライダーのつまみを、計測器のような金属風の四角いつまみ（グラデーションや影を使用）に変更しています。
+*   `.led.on`: HTMLのLEDの枠に対し、JavaScriptから `on` という目印（クラス）が付けられたときにだけ、明るい色と光が漏れるような影（`box-shadow`）を適用して、LEDが点灯しているように見せています。
+
+---
