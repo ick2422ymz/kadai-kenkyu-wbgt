@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WBGT 計測器シミュレーター</title>
+    <!-- CSSファイルを読み込む設定 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fontsからデジタル時計風のフォントを読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="device-container">
+        <!-- ヘッダー部分 -->
+        <header class="device-header">
+            <h1>WBGT MONITOR v1.0</h1>
+            <div class="status-indicator"></div>
+        </header>
 
+        <div class="device-body">
+            <!-- センサー入力エリア（つまみ） -->
+            <div class="input-panel">
+                <h2>SENSOR INPUTS</h2>
+                
+                <div class="control-group">
+                    <label>温度 (TEMP) <span id="temp-display" class="digital-text">25.0</span> ℃</label>
+                    <!-- スライダー。Tinkercadの可変抵抗や温度センサーの代わり -->
+                    <input type="range" id="temp-slider" min="10.0" max="40.0" step="0.1" value="25.0">
+                </div>
+
+                <div class="control-group">
+                    <label>湿度 (HUM) <span id="hum-display" class="digital-text">50</span> %</label>
+                    <input type="range" id="hum-slider" min="20" max="90" step="1" value="50">
+                </div>
+            </div>
+
+            <!-- 出力エリア（ディスプレイとLED） -->
+            <div class="output-panel">
+                <!-- WBGT値の表示ディスプレイ -->
+                <div class="display-screen">
+                    <div class="display-label">CALCULATED WBGT</div>
+                    <div id="wbgt-display" class="digital-text large-display">--.-</div>
+                    <div class="unit">℃ (室内目安)</div>
+                </div>
+
+                <!-- 警告レベルLED（TinkercadのLEDの代わり） -->
+                <div class="alert-system">
+                    <div id="status-text" class="status-message">WAITING...</div>
+                    <div class="led-array">
+                        <div id="led-green" class="led green"></div>
+                        <div id="led-yellow" class="led yellow"></div>
+                        <div id="led-red" class="led red"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScriptファイルを読み込む設定（通常はHTMLの最後） -->
+    <script src="script.js"></script>
+</body>
+</html>
+```eof
+
+**【HTMLの解説】**
+*   `<input type="range">`: これがTinkercadの温度センサーや可変抵抗器（つまみ）の代わりになるスライダーです。ユーザーがこれを動かすことで、JavaScriptに仮想の数値を送ります。
+*   `<div class="led">`: これがTinkercadのLEDパーツの代わりです。HTML自体はただの四角い枠（div）ですが、次のCSSで丸く色をつけてLEDのように見せます。
+
+---
